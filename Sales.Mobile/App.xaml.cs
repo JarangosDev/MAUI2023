@@ -1,4 +1,6 @@
-﻿namespace Sales.Mobile
+﻿using Sales.Mobile.MVVM.Views;
+
+namespace Sales.Mobile
 {
     public partial class App : Application
     {
@@ -6,7 +8,7 @@
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            MainPage = new NavigationPage(new PersonView());
         }
     }
 }
