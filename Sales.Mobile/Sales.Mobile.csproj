@@ -56,9 +56,19 @@
 	  <MauiXaml Update="ContentPageDemo.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="MVVM\Views\PersonView.xaml">
+	  <MauiXaml Update="MVVM\Views\CalculatorView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="MVVM\Models\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="MVVM\Views\CalculatorView.xaml.cs">
+	    <DependentUpon>CalculatorView.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 </Project>

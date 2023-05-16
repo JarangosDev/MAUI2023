@@ -8,7 +8,7 @@ namespace Sales.Mobile
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new PersonView());
+            MainPage = new NavigationPage(new CalculatorView());
         }
     }
 }
