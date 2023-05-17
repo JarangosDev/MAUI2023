@@ -40,8 +40,15 @@
             HorizontalTextAlignment="End"
             LineBreakMode="NoWrap"
             Text="0"
-            TextColor="Black"
+            TextColor="DarkGray"
             VerticalTextAlignment="Center" />
+
+            <BoxView 
+            BackgroundColor="DarkGray" 
+            HeightRequest="2"
+            Color="DarkGray"
+            Grid.Row="0" VerticalOptions="End"
+            Grid.ColumnSpan="4"/>
 
             <Button
             Grid.Row="1"
