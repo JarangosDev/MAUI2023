@@ -1,12 +1,5 @@
-﻿using Android.App;
-using PropertyChanged;
-using Sales.Mobile.MVVM.Views;
-using System;
-using System.Collections.Generic;
+﻿using PropertyChanged;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Sales.Mobile.MVVM.ViewModels
@@ -18,17 +11,17 @@ namespace Sales.Mobile.MVVM.ViewModels
         public string _result;
 
         public ICommand ClearCommand => new Command(() => Result = "0");
-        public ICommand DeleteCharacterCommand => new Command(() => Result = Result.Substring(0, Result.Length - 1));
-        public ICommand PercentageCommand => new Command(() => Result = (Double.Parse(Result) * 0.01).ToString());
-        public ICommand NumberSelectionCommand { get; set; }
-        public ICommand OperatorSelectionCommand { get; set; }
-        public ICommand CalculateCommand { get; set; }
+        public ICommand DeleteCharacter => new Command(() => Result = Result.Substring(0, Result.Length - 1));
+        public ICommand PercentCommand => new Command(() => Result = (Double.Parse(Result) * 0.01).ToString());
+        public ICommand SelectCommand { get; set; }
+        public ICommand OperatorSelectCommand { get; set; }
+        public ICommand CalculateOrder { get; set; }
 
         public CalculatorViewModels()
         {
-            NumberSelectionCommand = new Command<string>(NumberSelect);
-            OperatorSelectionCommand = new Command<string>(OperatorSelect);
-            CalculateCommand = new Command(Calculate);
+            SelectCommand = new Command<string>(NumberSelect);
+            OperatorSelectCommand = new Command<string>(OperatorSelect);
+            CalculateOrder = new Command(Calculate);
 
             Result = "0";
         }
@@ -41,38 +34,23 @@ namespace Sales.Mobile.MVVM.ViewModels
                 Result += number;
         }
 
-        public void OperatorSelect(string operation)
-        {
-            Result += operation;
-        }
-
         public void Calculate()
         {
             try
             {
-                var dataTable = new System.Data.DataTable();
-                var result = dataTable.Compute(Result, "");
+                var data = new System.Data.DataTable();
+                var result = data.Compute(Result, "");
                 Result = result.ToString();
             }
             catch (Exception ex)
             {
-                Result = "Se presentó un error en la calculadora: " + ex.Message;
-            }
-        }
-
-        public string Result
-        {
-            get { return _result; }
-            set
-            {
-                _result = value;
-                changedButtonsCalculator(nameof(Result));
+                Result = "*Error* " + ex.Message;
             }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void changedButtonsCalculator(string propertyName)
+        public void changedButton(string propertyName)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null)
@@ -81,5 +59,19 @@ namespace Sales.Mobile.MVVM.ViewModels
             }
         }
 
+        public void OperatorSelect(string operation)
+        {
+            Result += operation;
+        }
+
+        public string Result
+        {
+            get { return _result; }
+            set
+            {
+                _result = value;
+                changedButton(nameof(Result));
+            }
+        }
     }
 }

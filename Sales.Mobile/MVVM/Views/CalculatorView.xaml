@@ -33,14 +33,13 @@
             x:Name="result"
             Grid.Row="0"
             Grid.ColumnSpan="6"
-            Padding="20"
             BackgroundColor="White"
             FontAttributes="Bold"
             HeightRequest="450"
-            FontSize="120"
+            FontSize="80"
             HorizontalTextAlignment="End"
             LineBreakMode="NoWrap"
-            Text="0"
+            Text="{Binding Result}"
             TextColor="DarkGray"
             VerticalTextAlignment="Center" />
 
@@ -59,6 +58,7 @@
             FontSize="25"
             BorderWidth="2"
             BorderColor="DarkGray"
+            Command="{Binding ClearCommand}"
             Text="AC"
             TextColor="orange" />
 
@@ -72,6 +72,7 @@
             FontSize="25"
             BorderWidth="2"
             BorderColor="DarkGray"
+            Command="{Binding DeleteCharacter}"
             Text="X"
             TextColor="orange" />
             
@@ -84,6 +85,7 @@
             BorderWidth="2"
             BorderColor="DarkGray"
             FontSize="25"
+            Command="{Binding PercentageCommand}"
             Text="%"
             TextColor="orange" />
 
@@ -97,6 +99,8 @@
             FontSize="25"
             BorderWidth="2"
             BorderColor="DarkGray"
+            Command="{Binding SelectCommand}"
+            CommandParameter="7"
             Text="7"
             TextColor="DarkGrey" />
             
@@ -109,6 +113,8 @@
             FontSize="25"
             BorderWidth="2"
             BorderColor="DarkGray"
+            Command="{Binding SelectCommand}"
+            CommandParameter="8"
             Text="8"
             TextColor="DarkGrey" />
             
@@ -121,6 +127,8 @@
             BorderWidth="2"
             BorderColor="DarkGray"
             FontSize="25"
+            Command="{Binding SelectCommand}"
+            CommandParameter="9"
             Text="9"
             TextColor="DarkGrey" />
 
@@ -134,6 +142,8 @@
             BorderWidth="2"
             BorderColor="DarkGray"
             FontSize="25"
+            Command="{Binding SelectCommand}"
+            CommandParameter="4"
             Text="4"
             TextColor="DarkGrey" />
             
@@ -146,6 +156,8 @@
             BorderWidth="2"
             BorderColor="DarkGray"
             FontSize="25"
+            Command="{Binding SelectCommand}"
+            CommandParameter="5"
             Text="5"
             TextColor="DarkGrey" />
             
@@ -158,6 +170,8 @@
             BorderWidth="2"
             BorderColor="DarkGray"
             FontSize="25"
+            Command="{Binding SelectCommand}"
+            CommandParameter="6"
             Text="6"
             TextColor="DarkGrey" />
 
@@ -170,6 +184,8 @@
             BorderWidth="2"
             BorderColor="DarkGray"
             FontSize="25"
+            Command="{Binding SelectCommand}"
+            CommandParameter="1"
             Text="1"
             TextColor="DarkGrey" />
             
@@ -182,6 +198,8 @@
             BorderWidth="2"
             BorderColor="DarkGray"
             FontSize="25"
+            Command="{Binding SelectCommand}"
+            CommandParameter="2"
             Text="2"
             TextColor="DarkGrey" />
 
@@ -194,6 +212,8 @@
             BorderWidth="2"
             BorderColor="DarkGray"
             FontSize="25"
+            Command="{Binding SelectCommand}"
+            CommandParameter="3"
             Text="3"
             TextColor="DarkGrey" />
             
@@ -207,6 +227,8 @@
             BorderWidth="2"
             BorderColor="DarkGray"
             FontSize="25"
+            Command="{Binding SelectCommand}"
+            CommandParameter="0"
             Text="0"
             TextColor="DarkGrey" />
             
@@ -232,6 +254,8 @@
             BorderWidth="2"
             BorderColor="DarkGray"
             FontSize="25"
+            Command="{Binding OperatorSelectCommand}"
+            CommandParameter="/"
             Text="/"
             TextColor="orange" />
             
@@ -244,6 +268,8 @@
             BorderWidth="2"
             BorderColor="DarkGray"
             FontSize="25"
+            Command="{Binding OperatorSelectCommand}"
+            CommandParameter="*"
             Text="*"
             TextColor="orange" />
             
@@ -256,6 +282,8 @@
             BorderWidth="2"
             BorderColor="DarkGray"
             FontSize="25"
+            Command="{Binding OperatorSelectCommand}"
+            CommandParameter="-"
             Text="-"
             TextColor="orange" />
             
@@ -268,9 +296,11 @@
             BorderWidth="2"
             BorderColor="DarkGray"
             FontSize="25"
+            Command="{Binding OperatorSelectCommand}"
+            CommandParameter="+"
             Text="+"
             TextColor="orange" />
-            
+
             <Button
             Grid.Row="5"
             Grid.Column="3"
@@ -282,7 +312,8 @@
             FontSize="25"
             Text="="
             TextColor="orange" 
-            Command="{Binding OnCalculate}"/>
+            Command="{Binding CalculateOrder}"/>
+            
         </Grid>
 
     </VerticalStackLayout>
