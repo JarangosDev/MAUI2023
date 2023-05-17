@@ -1,4 +1,5 @@
 ﻿using Android.App;
+using PropertyChanged;
 using Sales.Mobile.MVVM.Views;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Windows.Input;
 
 namespace Sales.Mobile.MVVM.ViewModels
 {
+    [AddINotifyPropertyChangedInterface]
     public class CalculatorViewModels
     {
         public double Number1 { get; set; }
@@ -72,34 +74,34 @@ namespace Sales.Mobile.MVVM.ViewModels
             Result = "0";
         });
 
-        public ICommand OnNumberSelection => new Command((sender) =>
-        {
-            Button button = (Button)sender;
-            string btnPressed = button.Text;
+        //public ICommand OnNumberSelection => new Command((sender) =>
+        //{
+        //    Button button = (Button)sender;
+        //    string btnPressed = button.Text;
 
-            if (this.result.Text == "0" || currentState < 0)
-            {
-                this.result.Text = string.Empty;
-                if (currentState < 0)
-                    currentState *= -1;
-            }
+        //    if (this.result.Text == "0" || currentState < 0)
+        //    {
+        //        this.result.Text = string.Empty;
+        //        if (currentState < 0)
+        //            currentState *= -1;
+        //    }
 
-            this.result.Text += btnPressed;
+        //    this.result.Text += btnPressed;
 
-            double number;
-            if (double.TryParse(this.result.Text, out number))
-            {
-                this.result.Text = number.ToString("N0");
-                if (currentState == 1)
-                {
-                    Number1 = number;
-                }
-                else
-                {
-                    Number2 = number;
-                }
-            }
-        });
+        //    double number;
+        //    if (double.TryParse(this.result.Text, out number))
+        //    {
+        //        this.result.Text = number.ToString("N0");
+        //        if (currentState == 1)
+        //        {
+        //            Number1 = number;
+        //        }
+        //        else
+        //        {
+        //            Number2 = number;
+        //        }
+        //    }
+        //});
 
         public ICommand OnOperatorSelection => new Command((object sender) =>
         {
