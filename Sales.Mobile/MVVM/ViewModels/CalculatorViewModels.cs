@@ -24,95 +24,62 @@ namespace Sales.Mobile.MVVM.ViewModels
         public ICommand OperatorSelectionCommand { get; set; }
         public ICommand CalculateCommand { get; set; }
 
-        public ICommand OnCalculate => new Command(() =>
+        public CalculatorViewModels()
         {
-            if (currentState == 2)
-            {
-                var result = Calculate(Number1, Number2, Operator);
+            NumberSelectionCommand = new Command<string>(NumberSelect);
+            OperatorSelectionCommand = new Command<string>(OperatorSelect);
+            CalculateCommand = new Command(Calculate);
 
-                Result = result.ToString();
-                Number1 = result;
-                currentState = -1;
-            }
-        });
-
-
-        public int currentState = 1;
-
-        public static double Calculate(double Number1, double Number2, string Operator)
-        {
-            double result = 0;
-
-            switch (Operator)
-            {
-
-                case "+":
-                    result = Number1 + Number2;
-                    break;
-
-                case "-":
-                    result = Number1 - Number2;
-                    break;
-
-                case "*":
-                    result = Number1 * Number2;
-                    break;
-
-                case "/":
-                    result = Number1 / Number2;
-                    break;
-
-                default:
-                    break;
-            }
-
-            return result;
+            Result = "0";
         }
 
-        public ICommand OnClear => new Command((object sender) =>
+        public void NumberSelect(string number)
         {
-            Number1 = 0;
-            Number2 = 0;
-            currentState = 1;
-            Result = "0";
-        });
+            if (Result == "0")
+                Result = number;
+            else
+                Result += number;
+        }
 
-        //public ICommand OnNumberSelection => new Command((sender) =>
-        //{
-        //    Button button = (Button)sender;
-        //    string btnPressed = button.Text;
-
-        //    if (this.result.Text == "0" || currentState < 0)
-        //    {
-        //        this.result.Text = string.Empty;
-        //        if (currentState < 0)
-        //            currentState *= -1;
-        //    }
-
-        //    this.result.Text += btnPressed;
-
-        //    double number;
-        //    if (double.TryParse(this.result.Text, out number))
-        //    {
-        //        this.result.Text = number.ToString("N0");
-        //        if (currentState == 1)
-        //        {
-        //            Number1 = number;
-        //        }
-        //        else
-        //        {
-        //            Number2 = number;
-        //        }
-        //    }
-        //});
-
-        public ICommand OnOperatorSelection => new Command((object sender) =>
+        public void OperatorSelect(string operation)
         {
-            currentState = -2;
-            Button button = (Button)sender;
-            string btnPressed = button.Text;
-            Operator = btnPressed;
+            Result += operation;
+        }
 
-        });
+        public void Calculate()
+        {
+            try
+            {
+                var dataTable = new System.Data.DataTable();
+                var result = dataTable.Compute(Result, "");
+                Result = result.ToString();
+            }
+            catch (Exception ex)
+            {
+                Result = "Se presentó un error en la calculadora: " + ex.Message;
+            }
+        }
+
+        public string Result
+        {
+            get { return _result; }
+            set
+            {
+                _result = value;
+                changedButtonsCalculator(nameof(Result));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void changedButtonsCalculator(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
     }
 }
