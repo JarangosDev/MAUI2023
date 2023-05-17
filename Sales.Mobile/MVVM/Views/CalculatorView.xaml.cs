@@ -2,9 +2,9 @@ using Sales.Mobile.MVVM.ViewModels;
 
 namespace Sales.Mobile.MVVM.Views;
 
-public partial class Calculator : ContentPage
+public partial class CalculatorView : ContentPage
 {
-	public Calculator()
+	public CalculatorView()
 	{
 		InitializeComponent();
 		BindingContext = new CalculatorViewModels();

@@ -65,10 +65,4 @@
 	  <Folder Include="MVVM\Models\" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Compile Update="MVVM\Views\CalculatorView.xaml.cs">
-	    <DependentUpon>CalculatorView.xaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-
 </Project>
