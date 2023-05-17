@@ -280,7 +280,8 @@
             BorderColor="DarkGray"
             FontSize="25"
             Text="="
-            TextColor="orange" />
+            TextColor="orange" 
+            Command="{Binding OnCalculate}"/>
         </Grid>
 
     </VerticalStackLayout>
