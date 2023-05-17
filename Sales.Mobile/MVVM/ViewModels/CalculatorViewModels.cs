@@ -3,6 +3,7 @@ using PropertyChanged;
 using Sales.Mobile.MVVM.Views;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,16 +11,18 @@ using System.Windows.Input;
 
 namespace Sales.Mobile.MVVM.ViewModels
 {
+
     [AddINotifyPropertyChangedInterface]
-    public class CalculatorViewModels
+    public class CalculatorViewModels : INotifyPropertyChanged
     {
-        public double Number1 { get; set; }
+        public string _result;
 
-        public double Number2 { get; set; }
-
-        public string Operator { get; set; }
-
-        public string Result { get; set; }
+        public ICommand ClearCommand => new Command(() => Result = "0");
+        public ICommand DeleteCharacterCommand => new Command(() => Result = Result.Substring(0, Result.Length - 1));
+        public ICommand PercentageCommand => new Command(() => Result = (Double.Parse(Result) * 0.01).ToString());
+        public ICommand NumberSelectionCommand { get; set; }
+        public ICommand OperatorSelectionCommand { get; set; }
+        public ICommand CalculateCommand { get; set; }
 
         public ICommand OnCalculate => new Command(() =>
         {
