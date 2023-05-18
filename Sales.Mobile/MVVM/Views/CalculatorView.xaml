@@ -43,7 +43,7 @@
             Text="{Binding Result}"
             TextColor="DarkGray"
             VerticalTextAlignment="Center" />
-
+            
             <BoxView 
             BackgroundColor="DarkGray" 
             HeightRequest="2"
